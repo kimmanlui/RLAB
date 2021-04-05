@@ -1,5 +1,7 @@
 # RLAB Provides a set of useful functions
 # This is a branch test
+# This is a branch test
+
 
 getLastMonth=function(myDate=Sys.Date())
 {
