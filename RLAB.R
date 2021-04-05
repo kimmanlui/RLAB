@@ -22,13 +22,24 @@ getThisMonth=function(myDate=Sys.Date())
  
 getDataRange=function(reqFun, data=s, myDate=Sys.Date() ) 
 {
-  tempData=(data[index(data) %in% reqFun(myDate),])[,c(2,3)]
+  if (is.date(index(data))) dateDex=index(data)
+  else if ("date" %in% colnames(data) && is.date(data$date)) dateDex=data$date
+  tempData=(data[ dateDex %in% reqFun(myDate),])[,c(2,3)]
   if (nrow(tempData)==0) return(NULL)
   retV=round(range( tempData ),0)
   return(retV)
 }  
 
-getData=function(reqFun, data=s,myDate=Sys.Date() ) return(data[index(data) %in% reqFun(myDate),])
+getData=function (reqFun, data = s, myDate = Sys.Date())
+{
+  if (is.date(index(data))) dateDex=index(data)
+  else if ("date" %in% colnames(data) && is.date(data$date)) dateDex=data$date
+  
+  retV=data[dateDex %in% reqFun(myDate), ]
+  return(retV)    
+}
+
+
 
 getLastWeek=function(myDate=Sys.Date())
 {
