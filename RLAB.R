@@ -51,8 +51,6 @@ getLastWeek=function(myDate=Sys.Date())
   return(lastSun-c(2,3,4,5,6))
 }
 
-getLastWeekData=function(data=s,myDate=Sys.Date()) return(data[index(data) %in% getLastWeek(myDate),])
-
 getThisWeek=function(myDate=Sys.Date())
 {
   for (i in 1:7)
