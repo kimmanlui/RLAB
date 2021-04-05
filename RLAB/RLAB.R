@@ -19,8 +19,15 @@ getThisMonth=function(myDate=Sys.Date())
   dex=dex==curMon
   return( dateCand[dex] )
 }
+ 
+getDataRange=function(reqFun, data=s, myDate=Sys.Date() ) 
+{
+  tempData=(data[index(data) %in% reqFun(myDate),])[,c(2,3)]
+  if (nrow(tempData)==0) return(NULL)
+  retV=round(range( tempData ),0)
+  return(retV)
+}  
 
-getDataRange=function(reqFun, data=s, myDate=Sys.Date() ) return( round(range( (data[index(data) %in% reqFun(myDate),])[,c(2,3)]),0))
 getData=function(reqFun, data=s,myDate=Sys.Date() ) return(data[index(data) %in% reqFun(myDate),])
 
 getLastWeek=function(myDate=Sys.Date())
