@@ -1,7 +1,6 @@
 # RLAB Provides a set of useful functions
-# This is a branch test
-# This is a main
-# THIS IS IT
+# VERSION 1.0
+
 getLastMonth=function(myDate=Sys.Date())
 {
   curMon=toNum(months(myDate))
