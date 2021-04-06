@@ -1,0 +1,116 @@
+---
+title: "人工智能知識及應用證書（兼讀制）"
+output: html_notebook
+---
+
+Date : Jan-2021
+
+### Learning Objective
+As AI will soon be everywhere, everyone should have the right skill set to understand an AI model.<br>
+This tutorial is to demonstrate for beginners how to build Neural Network models in R to solve problems
+
+
+### Tools
+* R : R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. [1]
+* rstudio.cloud : Studio Cloud is created with an aim to make it easy for professionals, hobbyists, trainers, teachers and students to practice, share, teach and learn data science. In the basic term, RStudio Cloud is a managed cloud instance of the RStudio IDE.[2]
+
+
+```{r}
+install.packages('neuralnet')
+
+```
+Task 1: Install the R package ‘neuralnet’.
+
+```{r}
+library('neuralnet')
+```
+Task 2: Load the package ‘neuralnet’.
+
+
+```{r}
+rawdata = "
+ age , smoking, cancer
+ 35  ,  0 , 0
+ 40  ,  1 , 0
+ 45  ,  0 , 1
+ 55  ,  1 , 1"
+
+data <- read.csv(text=rawdata)
+
+print(data)
+```
+Task 3: Data Preparation<br>
+We have a small data set (four records).
+The meaning of data is self-explanatory.
+We need to find out if a person who is age=50 and smoking=1 will get cancer.
+Note that there is no special formula or if-then logic
+
+```{r}
+model=neuralnet(cancer~age+smoking,
+                data=data, 
+                hidden=3,
+                act.fct = "logistic",
+                linear.output = FALSE)
+```
+Task 4: Model<br>
+Build an artificial neural network model of hidden=3
+
+
+```{r}
+plot(model)
+```
+Task 5: Visualization<br>
+The model can be visualized as shown above.
+
+```{r}
+Predict=compute(model, data.frame(age=50, smoking=1))
+print(Predict)
+```
+Task 6: Prediction<br>
+The result value is very close to 1
+Thus, there is a high chance to get cancer.
+
+
+
+### Exercise
+[1] One more variabe, drinking, is added as below
+```{r}
+rawdata = "
+ age , smoking, drinking, cancer
+ 25  ,  1 , 1, 0
+ 30  ,  1 , 0, 0
+ 35  ,  0 , 1, 1
+ 38  ,  1 , 1, 1
+ 40  ,  1 , 1, 0
+ 45  ,  1 , 0, 0
+ 45  ,  1 , 1, 0
+ 47  ,  0 , 1, 1
+ 49  ,  1 , 1, 1
+ 55  ,  1 , 1, 1"
+```
+Build a model to solve a case that a person who is age=30, smoking=1, drinking=1 may get cancer.
+<br>
+<br>
+<br>
+<br>
+[2] Redo the exercise 1 with the model of hidden=c(3,3)
+```{r}
+model=neuralnet(cancer~age+smoking,
+                data=data, 
+                hidden=c(3,3),
+                act.fct = "logistic",
+                linear.output = FALSE)
+plot(model)
+```
+
+<br>
+
+### Reference
+
+[1] R语言<br>
+https://zh.wikipedia.org/wiki/R%E8%AF%AD%E8%A8%80<br>
+[2] What Is RStudio Cloud And Why Is It Gaining Popularity<br>
+https://analyticsindiamag.com/what-is-rstudio-cloud-and-why-is-it-gaining-popularity/ <br>
+[3] R for Economics and Finance: Getting research data<br>
+http://rstudio-pubs-static.s3.amazonaws.com/41274_b888794c95b84e6b937c1099202380c4.html
+
