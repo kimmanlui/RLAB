@@ -1,6 +1,7 @@
 # RLAB Provides a set of useful functions
 # VERSION 1.0
 
+
 getLastMonth=function(myDate=Sys.Date())
 {
   curMon=toNum(months(myDate))
