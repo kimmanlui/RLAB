@@ -1,7 +1,7 @@
 # RLAB Provides a set of useful functions
 # VERSION 1.0
 
-
+is.date <- function(x) inherits(x, 'Date')
 
 getLastMonth=function(myDate=Sys.Date())
 {
