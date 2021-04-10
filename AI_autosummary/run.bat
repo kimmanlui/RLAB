@@ -1,0 +1,1 @@
+C:\Anaconda3\python spacyrun.py
