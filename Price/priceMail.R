@@ -1,14 +1,19 @@
 
 
+require(XML)
+xmlData <- xmlParse("/kim/conf.xml")
+confData <- xmlToList(xmlData)
+
 library("reticulate")
 use_python("/programdata/anaconda3", required = T)
 py_config()
 rootDirR="/kim/gitdir/RLAB/Price/"
-source_python("/kim/outlook_LIB.py")
+source_python("/kim/gitdir/RLAB/Outlook/outlook_LIB.py")
 
 #outlookMail('TEST_MAIL', 'TEST')
-source("/kim/et_LIB.R")
-source( paste0(rootDir, "dailyData.R") )
+
+source( paste0(rootDirR, "et_LIB.R") )
+source( paste0(rootDirR, "dailyData.R") )
 
 dailyHSI=NULL
 print(paste("start at:", format(Sys.time())))
@@ -115,7 +120,7 @@ while(1==1)
           Subject=paste0('CELLRPT ',cmin,": ",vl,' / ',ssec.short,tail )
           
           body=tryCatch({
-            outlookMail(Subject, body)
+            outlookMail(Subject, body , to=confData[['to']] ,  rootFolderName=confData[['rootFolderName']])
           }, warning = function(w) {
             NULL
           }, error = function(e) {
