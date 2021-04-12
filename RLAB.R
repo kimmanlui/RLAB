@@ -128,6 +128,14 @@ getPeriod=function(dailyData,period)
 
 normalFun=function(x, l, h) round((x -l)/(h-l) , 2)
 
+
+getRecentBound_for_V=function(x)
+{
+  wkR=normalFun( x , lastWeekRange[1] , lastWeekRange[2])
+  mtR=normalFun( x , lastMonthRange[1] , lastMonthRange[2])
+  return(c(mtR, wkR))
+}
+
 getRecentBound=function()
 {
   fileName=paste0('/kim/data/Data',Sys.Date())
