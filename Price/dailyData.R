@@ -16,8 +16,7 @@ for (i in 1:nrow(sfp)) #i=1
   sfp[i,'c']=sum(sfn==sfp[i,'v'])
 }
 
-source('https://raw.githubusercontent.com/kimmanlui/RLAB/main/RLAB.R')
-#source('/kim/gitdir/RLAB/RLAB.R')
+source('https://raw.githubusercontent.com/kimmanlui/RLAB/main/Price/RLAB.R')
 
 thisWeekRange =getDataRange(getThisWeek)
 lastWeekRange =getDataRange(getLastWeek)
