@@ -4,6 +4,19 @@ require(XML)
 xmlData <- xmlParse("/kim/conf.xml")
 confData <- xmlToList(xmlData)
 
+source('/kim/gitdir/RLAB/common/From_util.R')
+source('/kim/gitdir/RLAB/common/JDBC_MYSQL.R')
+
+
+
+getLatest=function()
+{
+  retV=dbGetQuery(conn, "select * from et order by date , batch desc  LIMIT 1 ")
+  return(retV)
+}
+
+
+
 library("reticulate")
 use_python("/programdata/anaconda3", required = T)
 py_config()
@@ -38,7 +51,7 @@ endTime   =1602
 while(1==1)
 {
 
-  if (istamp==startTime)  source( paste0(rootDir, "dailyData.R") )
+  if (istamp==startTime)  source( paste0(rootDirR, "dailyData.R") )
     
   
   dayOfWeek=weekdays(Sys.Date())
@@ -50,29 +63,40 @@ while(1==1)
       if ( firsttime==1 || (startTime<=istamp && istamp<=startLunch) ||  (endLunch<=istamp && istamp<endTime) )
       {
         batch=getBatch()
+        
         vl.org=tryCatch({
-          getETQuote()
-        }, warning = function(w) {
-          NULL
-        }, error = function(e) {
-          print("Error : calling getBatch")
+          getLatest()
+        }, warning = function(w) {  NULL
+        }, error = function(e)   {  print("Error : calling getLatest") 
         })
         
-        #vl.org=getETQuote()
+        
+        
+      #  vl.org=tryCatch({
+      #    getETQuote()
+      #  }, warning = function(w) {
+      #    NULL
+      #  }, error = function(e) {
+      #    print("Error : calling getBatch")
+      #  })
+       
+        
+   
         if (!is.null(vl.org))
         {
           mins=as.numeric(as.character(format(Sys.time(),"%M" )))
-          ish=round(vl.org[3],0)
+          ish=round( as.numeric(vl.org[3]) ,0)
           vl=substrRight(ish,3)
-          ssec.org=round(getSSEC()[2],0)
-          names(ssec.org)="sh"
-          vl.org=cbind(vl.org, ssec.org)
-          ssec.short=substrRight(round(ssec.org,0),2)
-          
-          tempData=data.frame(date=Sys.Date(),batch=batch, stamp=istamp , hsi=ish, ssec=as.numeric(ssec.org))
+          vl.org['sh']=round(  as.numeric(vl.org['sh'])  ,0)
+          #ssec.org=getSSEC()[2]
+          #names(ssec.org)="sh"
+          #vl.org=cbind(vl.org, ssec.org)
+          ssec.short=substrRight(round(  as.numeric(vl.org['sh']) ,0),2)
+          dbBatch=vl.org['batch']
+          tempData=data.frame(date=Sys.Date(),batch=vl.org['batch'], stamp=batchToStamp(batch) , hsi=ish, ssec=as.numeric(vl.org['sh']))
           dailyData=rbind(dailyData,tempData)
           vl.org$X6=0
-          
+           
           fileName=paste0('/kim/data/Data',Sys.Date())
           save(dailyData, file=fileName)
         }
@@ -117,7 +141,7 @@ while(1==1)
           if (mins==10 || mins==20 || mins==40 || mins==50 || mins==11 || mins==21 || mins==41 || mins==51 ) tail=' ...'
           cmin=paste0('00',mins)
           cmin=substr(cmin,nchar(cmin)-1,nchar(cmin))
-          Subject=paste0('CELLRPT ',cmin,": ",vl,' / ',ssec.short,tail )
+          Subject=paste0('CELLRPT ',batchToStamp(dbBatch) ,  ": ",vl,' / ',ssec.short,tail )
           
           body=tryCatch({
             outlookMail(Subject, body , to=confData[['to']] ,  rootFolderName=confData[['rootFolderName']])
