@@ -63,7 +63,7 @@ while(1==1)
       if ( firsttime==1 || (startTime<=istamp && istamp<=startLunch) ||  (endLunch<=istamp && istamp<endTime) )
       {
         batch=getBatch()
-        
+        vl.org=NULL 
         vl.org=tryCatch({
           getLatest()
         }, warning = function(w) {  NULL
@@ -71,15 +71,7 @@ while(1==1)
         })
         
         
-        
-      #  vl.org=tryCatch({
-      #    getETQuote()
-      #  }, warning = function(w) {
-      #    NULL
-      #  }, error = function(e) {
-      #    print("Error : calling getBatch")
-      #  })
-       
+
         
    
         if (!is.null(vl.org))

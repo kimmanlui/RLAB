@@ -138,8 +138,14 @@ getRecentBound_for_V=function(x)
 
 getRecentBound=function()
 {
-  fileName=paste0('/kim/data/Data',Sys.Date())
-  if (file.exists(fileName)) load(file=fileName) else return(paste0(fileName,' Not Found'))
+  #fileName=paste0('/kim/data/Data',Sys.Date())
+  #if (file.exists(fileName)) load(file=fileName) else return(paste0(fileName,' Not Found'))
+ 
+  
+  sql=paste0("select * from et where date='",Sys.Date(),"'")
+  dailyData=dbGetQuery(conn, sql)
+
+  
   dailyData=dailyData[dailyData$date==Sys.Date(), ]
   if (nrow(dailyData)<10) return('')
   period=c(0930,1000,1030,1100,1130,1200,1330,1400,1430,1500,1530,1600,1630)
