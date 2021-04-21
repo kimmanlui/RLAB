@@ -136,6 +136,8 @@ getRecentBound_for_V=function(x)
   return(c(mtR, wkR))
 }
 
+
+
 getRecentBound=function()
 {
   #fileName=paste0('/kim/data/Data',Sys.Date())
@@ -149,9 +151,14 @@ getRecentBound=function()
   dailyData=dailyData[dailyData$date==Sys.Date(), ]
   if (nrow(dailyData)<10) return('')
   period=c(0930,1000,1030,1100,1130,1200,1330,1400,1430,1500,1530,1600,1630)
+  dailyData$stamp = batchToStamp(dailyData$batch)
+  
   perInfo=getPeriod(dailyData, period)
+  
   perInfo=perInfo[order(perInfo[,1], decreasing =TRUE),]
-  perInfo$diff=perInfo$x-perInfo$i
+  perInfo$x   = as.numeric(as.character(perInfo$x))
+  perInfo$i   = as.numeric(as.character(perInfo$i))
+  perInfo$diff= perInfo$x - perInfo$i
   
   perInfo$d1=NA
   perInfo$d2=NA
@@ -190,5 +197,5 @@ getRecentBound=function()
 }
 
 
-
+#getRecentBound()
 

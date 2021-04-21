@@ -16,12 +16,12 @@ jdbcDriver <- JDBC("com.mysql.jdbc.Driver",
 
 dblink=list( confData[['MYSQL_URL']] , confData[['MYSQL_LOGIN']], confData[['MYSQL_PASSWORD']])  #PROD
 
-gb_jdbc_cursor_counter=0
+gb_jdbc_cursor_counter<<-0
 #
 #install.packages('RMariaDB')
 dbGetQuery=function(conn, sql)
 {
-  if (gb_jdbc_cursor_counter>80) resetjdbc()
+  if (gb_jdbc_cursor_counter>30) resetjdbc()
   gb_jdbc_cursor_counter <<- gb_jdbc_cursor_counter+1
   RJDBC::dbGetQuery(conn, sql)
 }

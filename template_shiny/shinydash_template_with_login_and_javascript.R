@@ -37,6 +37,14 @@ UI_SECOND=function() {
   )
 }
 
+guestMenu=function()
+{
+  sidebarMenu( id = "tabs",
+               menuItem("Main Page", tabName = "dashboard", icon = icon("dashboard")),
+               menuItem("Demo Two" , tabName = "second", icon = icon("th"))
+  )
+}
+
 masterMenu=function()
 {
   sidebarMenu( id = "tabs",
@@ -102,9 +110,9 @@ loginpage <- div(id = "loginpage", style = "width: 500px; max-width: 100%; margi
 
 
 credentials = data.frame(
-  username_id = c("kimman", "myuser1"),
-  passod      = sapply(c("kimman", "mypass1"),password_store),
-  permission  = c("basic", "advanced"), 
+  username_id =        c("kimman", "guest"),
+  passod      = sapply(c("kimman", "guest"),password_store),
+  permission  =        c("master", "guest"), 
   stringsAsFactors = F
 )
 
@@ -161,7 +169,18 @@ server <- function(input, output, session) {
   
   output$sidebarpanel <- renderUI({
     if (USER$login == TRUE ){ 
-      masterMenu()
+      permission_level=credentials[credentials$username_id==input$userName, 'permission']
+      print(paste('Username:',input$userName  ,' Permission Level:',permission_level))
+      if (permission_level=='master')
+      {
+        masterMenu()
+      } else if  (permission_level=='guest')
+      {
+        guestMenu()
+      } else
+      {
+        guestMenu()
+      }
     }
   })
 

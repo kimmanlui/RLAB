@@ -1,32 +1,35 @@
-
+rm(list = ls(all = TRUE)) 
 
 require(XML)
 xmlData <- xmlParse("/kim/conf.xml")
 confData <- xmlToList(xmlData)
 
+rootDirR="/kim/gitdir/RLAB/Price/"
 source('/kim/gitdir/RLAB/common/From_util.R')
 source('/kim/gitdir/RLAB/common/JDBC_MYSQL.R')
 
-
+source( paste0(rootDirR, "et_LIB.R") )
+source( paste0(rootDirR, "dailyData.R") )
+source( paste0(rootDirR, "dailyData_LIB.R") )
 
 getLatest=function()
 {
-  retV=dbGetQuery(conn, "select * from et order by date , batch desc  LIMIT 1 ")
+  retV=dbGetQuery(conn, "select * from et order by date desc, batch desc  LIMIT 1 ")
   return(retV)
 }
+
 
 
 
 library("reticulate")
 use_python("/programdata/anaconda3", required = T)
 py_config()
-rootDirR="/kim/gitdir/RLAB/Price/"
 source_python("/kim/gitdir/RLAB/Outlook/outlook_LIB.py")
+
 
 #outlookMail('TEST_MAIL', 'TEST')
 
-source( paste0(rootDirR, "et_LIB.R") )
-source( paste0(rootDirR, "dailyData.R") )
+
 
 dailyHSI=NULL
 print(paste("start at:", format(Sys.time())))
@@ -52,7 +55,7 @@ while(1==1)
 {
 
   if (istamp==startTime)  source( paste0(rootDirR, "dailyData.R") )
-    
+     
   
   dayOfWeek=weekdays(Sys.Date())
   dweek=!(dayOfWeek=='Sunday' || dayOfWeek=='Saturday')
@@ -60,6 +63,7 @@ while(1==1)
   {
     while (firsttime==1 || startTime<=istamp && istamp<endTime)
     {
+      
       if ( firsttime==1 || (startTime<=istamp && istamp<=startLunch) ||  (endLunch<=istamp && istamp<endTime) )
       {
         batch=getBatch()
@@ -92,6 +96,7 @@ while(1==1)
           fileName=paste0('/kim/data/Data',Sys.Date())
           save(dailyData, file=fileName)
         }
+       
         
         print(as.numeric(vl.org[3])) #stockV
         
@@ -114,8 +119,10 @@ while(1==1)
           print("Error : calling getRecentBound_for_V")
         })
         body_current_V_bound=paste0(body_current_V_bound, collapse=", ")
-        print(paste0('body_current_V_bound:',body_current_V_bound))
+        print(paste0('body_current_V_bound:',body_current_V_bound)) 
         
+        
+       
         body2='NA'
         body2=tryCatch({
           getRecentBound()
