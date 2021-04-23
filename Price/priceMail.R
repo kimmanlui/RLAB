@@ -12,9 +12,17 @@ source( paste0(rootDirR, "et_LIB.R") )
 source( paste0(rootDirR, "dailyData.R") )
 source( paste0(rootDirR, "dailyData_LIB.R") )
 
-getLatest=function()
+getPrice=function(sDate=NULL)
 {
-  retV=dbGetQuery(conn, "select * from et order by date desc, batch desc  LIMIT 1 ")
+  if (is.null(sDate))
+  {
+    sql="select * from et order by date desc, batch desc  LIMIT 1 "
+  } else
+  {
+    sql=paste0("select * from et where date='",sDate,"' order by date desc, batch desc ")
+    #print(sql)
+  }
+  retV=dbGetQuery(conn,sql)
   return(retV)
 }
 
@@ -69,9 +77,9 @@ while(1==1)
         batch=getBatch()
         vl.org=NULL 
         vl.org=tryCatch({
-          getLatest()
+          getPrice()
         }, warning = function(w) {  NULL
-        }, error = function(e)   {  print("Error : calling getLatest") 
+        }, error = function(e)   {  print("Error : calling getprice") 
         })
         
         

@@ -21,7 +21,7 @@ gb_jdbc_cursor_counter<<-0
 #install.packages('RMariaDB')
 dbGetQuery=function(conn, sql)
 {
-  if (gb_jdbc_cursor_counter>30) resetjdbc()
+  if (gb_jdbc_cursor_counter>20) {print('resetjdbc');resetjdbc();}
   gb_jdbc_cursor_counter <<- gb_jdbc_cursor_counter+1
   RJDBC::dbGetQuery(conn, sql)
 }
@@ -38,10 +38,11 @@ resetjdbc=function(second=0)
   tryCatch(dbDisconnect(conn), error=function(e) print("timeout conn"))
   Sys.sleep(second)
   gb_jdbc_cursor_counter <<- 0
+
   conn <<- RJDBC::dbConnect(jdbcDriver, 
-                     paste0("jdbc:oracle:thin:@//",dblink[[1]]), 
-                     dblink[[2]], 
-                     dblink[[3]])
+                          dblink[[1]], 
+                          dblink[[2]], 
+                          dblink[[3]])
 }
 
 

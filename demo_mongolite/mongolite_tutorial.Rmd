@@ -1,0 +1,105 @@
+---
+title: "MongoDB with R"
+output: html_notebook
+---
+
+The purpose of this document is to demonstrate how mongolite performs basic database operations. 
+
+
+```{r}
+library(mongolite)
+```
+
+
+Suppose that we have a simple dataframe. 
+```{r}
+mg <- mongo(collection = "mydb" , db='kimman',  url = "mongodb://localhost")
+mg$drop()
+```
+
+#INSERT
+## INSERT 1
+```{r}
+mydata=data.frame(moon=c('titan','europa','enceladus'), planet=c('saturn', 'jupiter','earth'))
+mg$insert(mydata)
+mg$count()
+
+```
+## INSERT 2
+```{r}
+mg$insert(data.frame(moon=c('moon'), planet=c('earth')))
+mg$find()
+```
+
+
+
+
+## INSERT 3
+This is powerful for MongoDB becuase the schema structure can be easily adjusted. 
+```{r}
+mg$insert(data.frame(life=c(1), planet=c('earth')))
+mg$find()
+```
+
+## INSERT 4
+```{r}
+mg$insert('{ "item": "card", "qty": 15 } ')
+mg$find()
+```
+
+
+#UPDATE
+This is powerful as we can update a non-existent field
+```{r}
+mg$update(query=' {"moon":"enceladus"}',  update='{"$set": {"rover":"yes" }} ')
+mg$find()
+```
+
+```{r}
+mg$update(query=' {"moon":"enceladus"}',  update='{"$set": {"rover": {"TYPE":"A", "MASS":"KNOWN"} }} ')
+mg$find()
+```
+
+
+
+#SEARCH
+Search with condition (1)
+```{r}
+mg$find('{"planet" : "earth", "life" : { "$lt" : 5 } }')
+```
+Search with condition (2)
+```{r}
+
+mg$find('{"planet" : "earth", "moon":"moon"}' )
+```
+Search with condition (3)
+```{r}
+mg$find('{"rover.TYPE" : "A"}')
+df=mg$find('{"rover.TYPE" : "A"}')
+print(df)
+```
+
+
+
+#DELETE
+```{r}
+mg$remove('{"moon":"titan"}')
+mg$find()
+```
+
+
+List out existing database
+```{r}
+admin <- mongo(db = "admin")
+admin$run('{"listDatabases":1}')
+```
+
+List out existing collection
+```{r}
+col <- mongo()
+col$run('{"listCollections":1}')
+```
+
+Reference
+https://jeroen.github.io/mongolite/server-tools.html#running-commands
+https://jeroen.github.io/mongolite/calculation.html#aggregate
