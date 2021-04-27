@@ -76,10 +76,11 @@ while(1==1)
       {
         batch=getBatch()
         vl.org=NULL 
+        
         vl.org=tryCatch({
           getPrice()
         }, warning = function(w) {  NULL
-        }, error = function(e)   {  print("Error : calling getprice") 
+        }, error = function(e)   {  print(paste(Sys.time()," Error : calling getprice")) 
         })
         
         
