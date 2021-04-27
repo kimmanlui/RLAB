@@ -1,0 +1,47 @@
+---
+title: "Lattice Demo"
+output: html_notebook
+---
+
+A quick demo to show the use of lattice
+
+```{r}
+library(lattice)
+```
+
+Get some data
+```{r}
+my_data <- iris
+head(my_data)
+```
+
+#Basic single panel
+Basic scatter plot: y ~ x
+```{r}
+xyplot(Sepal.Length ~ Petal.Length, data = my_data)
+```
+
+#Single panel (Color by group)
+Color by groups
+```{r}
+xyplot(Sepal.Length ~ Petal.Length, group = Species, 
+       data = my_data, auto.key = TRUE)
+```
+#Single panel with added features
+Show points ("p"), grids ("g") and smoothing line
+Change xlab and ylab
+```{r}
+xyplot(Sepal.Length ~ Petal.Length, data = my_data,
+       type = c("p", "g", "smooth"),
+       xlab = "Miles/(US) gallon", ylab = "Weight (1000 lbs)")
+```
+
+
+#Multiple panels by groups
+Syntax y ~ x | group
+```{r}
+xyplot(Sepal.Length ~ Petal.Length | Species, 
+       group = Species, data = my_data,
+       type = c("p", "smooth"),
+       scales = "free")
+```

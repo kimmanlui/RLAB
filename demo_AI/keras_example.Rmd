@@ -21,7 +21,7 @@ y_test  <- mnist$test$y
 
 
 ```{r}
-load(file='/Users/homa/desktop/mnist.RData')
+load(file='/kim/mnist.RData')
 print('done')
 ```
 
