@@ -129,13 +129,19 @@ getPeriod=function(dailyData,period)
 normalFun=function(x, l, h) round((x -l)/(h-l) , 2)
 
 
-getRecentBound_for_V=function(x)
+getRecentBound_for_last=function(x)
 {
-  wkR=normalFun( x , lastWeekRange[1] , lastWeekRange[2])
-  mtR=normalFun( x , lastMonthRange[1] , lastMonthRange[2])
-  return(c(mtR, wkR))
+  wkLast=normalFun( x , lastWeekRange[1] , lastWeekRange[2])
+  mtLast=normalFun( x , lastMonthRange[1] , lastMonthRange[2])
+  return(c(mtLast, wkLast))
 }
 
+getRecentBound_for_this=function(x)
+{
+  wkThis=normalFun( x , thisWeekRange[1] , thisWeekRange[2])
+  mtThis=normalFun( x , thisMonthRange[1] , thisMonthRange[2])
+  return(c(mtThis, wkThis))
+}
 
 
 getRecentBound=function()

@@ -119,19 +119,31 @@ while(1==1)
         })
         print(paste0('body:',body))
         
-        body_current_V_bound='NA'
-        body_current_V_bound=tryCatch({
-          getRecentBound_for_V(as.numeric(vl.org[3]))
+        body_current_V_bound_last='NA'
+        body_current_V_bound_last=tryCatch({
+          getRecentBound_for_last(as.numeric(vl.org[3]))
         }, warning = function(w) {
           NULL
         }, error = function(e) {
-          print("Error : calling getRecentBound_for_V")
+          print("Error : calling getRecentBound_for_last")
         })
-        body_current_V_bound=paste0(body_current_V_bound, collapse=", ")
-        print(paste0('body_current_V_bound:',body_current_V_bound)) 
+        body_current_V_bound_last=paste0(body_current_V_bound_last, collapse=", ")
+        print(paste0('body_current_V_bound_last:',body_current_V_bound_last)) 
         
-        
+
+        body_current_V_bound_this='NA'
+        body_current_V_bound_this=tryCatch({
+          getRecentBound_for_this(as.numeric(vl.org[3]))
+        }, warning = function(w) {
+          NULL
+        }, error = function(e) {
+          print("Error : calling getRecentBound_for_this")
+        })
+        body_current_V_bound_this=paste0(body_current_V_bound_this, collapse=", ")
+        print(paste0('body_current_V_bound_this:',body_current_V_bound_this))      
        
+        
+        
         body2='NA'
         body2=tryCatch({
           getRecentBound()
@@ -140,7 +152,9 @@ while(1==1)
         }, error = function(e) {
           print("Error : calling getRecentBound")
         })
-        body=paste0(body,'\n\n',body_current_V_bound,'\n\n',body2)
+        body=paste0(body,'\n\n',body_current_V_bound_this)
+        body=paste0(body,'\n\n',body_current_V_bound_last)
+        body=paste0(body,'\n\n',body2)
         
         if (mins %% 2==0 || firsttime==1)
         {
