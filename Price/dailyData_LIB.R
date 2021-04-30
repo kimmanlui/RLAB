@@ -131,18 +131,24 @@ normalFun=function(x, l, h) round((x -l)/(h-l) , 2)
 
 getRecentBound_for_last=function(x)
 {
-  wkLast=normalFun( x , lastWeekRange[1] , lastWeekRange[2])
+  wkLast=normalFun( x , lastWeekRange[1]  , lastWeekRange[2])
   mtLast=normalFun( x , lastMonthRange[1] , lastMonthRange[2])
   return(c(mtLast, wkLast))
 }
 
 getRecentBound_for_this=function(x)
 {
-  wkThis=normalFun( x , thisWeekRange[1] , thisWeekRange[2])
+  wkThis=normalFun( x , thisWeekRange[1]  , thisWeekRange[2])
   mtThis=normalFun( x , thisMonthRange[1] , thisMonthRange[2])
   return(c(mtThis, wkThis))
 }
 
+getRecentBound_for_thislast=function(x)
+{
+  wkThisLast=normalFun( x , thislastWeekRange[1]  , thislastWeekRange[2])
+  mtThisLast=normalFun( x , thislastMonthRange[1] , thislastMonthRange[2])
+  return(c(mtThisLast, wkThisLast))
+}
 
 getRecentBound=function()
 {

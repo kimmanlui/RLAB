@@ -142,6 +142,16 @@ while(1==1)
         body_current_V_bound_this=paste0(body_current_V_bound_this, collapse=", ")
         print(paste0('body_current_V_bound_this:',body_current_V_bound_this))      
        
+        body_current_V_bound_thislast='NA'
+        body_current_V_bound_thislast=tryCatch({
+          getRecentBound_for_thislast(as.numeric(vl.org[3]))
+        }, warning = function(w) {
+          NULL
+        }, error = function(e) {
+          print("Error : calling getRecentBound_for_thislast")
+        })
+        body_current_V_bound_thislast=paste0(body_current_V_bound_thislast, collapse=", ")
+        print(paste0('body_current_V_bound_thislast:',body_current_V_bound_thislast))      
         
         
         body2='NA'
@@ -154,6 +164,7 @@ while(1==1)
         })
         body=paste0(body,'\n\n',body_current_V_bound_this)
         body=paste0(body,'\n\n',body_current_V_bound_last)
+        body=paste0(body,'\n\n',body_current_V_bound_thislast)
         body=paste0(body,'\n\n',body2)
         
         if (mins %% 2==0 || firsttime==1)
