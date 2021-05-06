@@ -22,13 +22,13 @@ source('/kim/gitdir/RLAB/Price/dailyData_LIB.R')
 
 
 
-thislastWeekRange =getDataRange( (function(x) unique(c(getThisWeek() , getLastWeek ())) ) ) 
-thislastMonthRange=getDataRange( (function(x) unique(c(getThisMonth(), getLastMonth())) ) ) 
+thislastWeekRange =getDataRange( (function(x) unique(c(getThisWeek() , getLastWeek ())) ) , patchColumnFromDB='hsi') 
+thislastMonthRange=getDataRange( (function(x) unique(c(getThisMonth(), getLastMonth())) ) , patchColumnFromDB='hsi') 
 
-thisWeekRange =getDataRange(getThisWeek)
-lastWeekRange =getDataRange(getLastWeek)
-thisMonthRange=getDataRange(getThisMonth)
-lastMonthRange=getDataRange(getLastMonth)
+thisWeekRange =getDataRange(getThisWeek,  patchColumnFromDB='hsi')
+lastWeekRange =getDataRange(getLastWeek,  patchColumnFromDB='hsi')
+thisMonthRange=getDataRange(getThisMonth, patchColumnFromDB='hsi')
+lastMonthRange=getDataRange(getLastMonth, patchColumnFromDB='hsi')
 
 thisWeekRange
 lastWeekRange

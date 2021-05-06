@@ -12,19 +12,7 @@ source( paste0(rootDirR, "et_LIB.R") )
 source( paste0(rootDirR, "dailyData.R") )
 source( paste0(rootDirR, "dailyData_LIB.R") )
 
-getPrice=function(sDate=NULL)
-{
-  if (is.null(sDate))
-  {
-    sql="select * from et order by date desc, batch desc  LIMIT 1 "
-  } else
-  {
-    sql=paste0("select * from et where date='",sDate,"' order by date desc, batch desc ")
-    #print(sql)
-  }
-  retV=dbGetQuery(conn,sql)
-  return(retV)
-}
+
 
 
 
@@ -118,7 +106,9 @@ while(1==1)
           print("Error : calling getBound")
         })
         print(paste0('body:',body))
+       
         
+         
         body_current_V_bound_last='NA'
         body_current_V_bound_last=tryCatch({
           getRecentBound_for_last(as.numeric(vl.org[3]))
@@ -162,9 +152,9 @@ while(1==1)
         }, error = function(e) {
           print("Error : calling getRecentBound")
         })
-        body=paste0(body,'\n\n',body_current_V_bound_this)
-        body=paste0(body,'\n\n',body_current_V_bound_last)
-        body=paste0(body,'\n\n',body_current_V_bound_thislast)
+        body=paste0(body,'\n\n','this mt/wk: ',body_current_V_bound_this)
+        body=paste0(body,'\n\n','last mt/wk: ',body_current_V_bound_last)
+        body=paste0(body,'\n\n','thla mt/wk: ',body_current_V_bound_thislast)
         body=paste0(body,'\n\n',body2)
         
         if (mins %% 2==0 || firsttime==1)

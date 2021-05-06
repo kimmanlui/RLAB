@@ -1,6 +1,20 @@
 # RLAB Provides a set of useful functions
 # VERSION 1.0
 
+getPrice=function(sDate=NULL)
+{
+  if (is.null(sDate))
+  {
+    sql="select * from et order by date desc, batch desc  LIMIT 1 "
+  } else
+  {
+    sql=paste0("select * from et where date='",sDate,"' order by date desc, batch desc ")
+    #print(sql)
+  }
+  retV=dbGetQuery(conn,sql)
+  return(retV)
+}
+
 is.date <- function(x) inherits(x, 'Date')
 
 getLastMonth=function(myDate=Sys.Date())
@@ -23,7 +37,7 @@ getThisMonth=function(myDate=Sys.Date())
   return( dateCand[dex] )
 }
  
-getDataRange=function(reqFun, data=s, myDate=Sys.Date() ) 
+getDataRangeOLD=function(reqFun, data=s, myDate=Sys.Date() ) 
 {
   if (is.date(index(data))) dateDex=index(data)
   else if ("date" %in% colnames(data) && is.date(data$date)) dateDex=data$date
@@ -32,6 +46,47 @@ getDataRange=function(reqFun, data=s, myDate=Sys.Date() )
   retV=round(range( tempData ),0)
   return(retV)
 }  
+
+
+getDataRange=function(reqFun, data=s, myDate=Sys.Date() , patchColumnFromDB='X') 
+{
+  if (is.date(index(data))) dateDex=index(data)
+  else if ("date" %in% colnames(data) && is.date(data$date)) dateDex=data$date
+  eachDateSet=reqFun(myDate)
+  tempData=(data[ dateDex %in% eachDateSet ,])[,c(2,3)]
+  
+  
+  problemRowDate=NULL
+  
+  print(tempData)
+  for (i in 1:nrow(tempData))
+  {
+    #print(eachDateSet[i])
+    #tmp=as.vector(tempData[index(tempData)==eachDateSet[i], 1])
+    tmp=tempData[i,1]
+    if (is.na(tmp))
+    {
+      problemRowDate=c(problemRowDate, as.character(index(tmp)))
+    }
+  }
+ 
+  if (!is.null(problemRowDate) && patchColumnFromDB!='X')
+  { 
+    for (i in 1:length(problemRowDate))
+    {
+      
+      tmpSet=getPrice(sDate=problemRowDate[i])
+      tmpRg=range(tmpSet[,patchColumnFromDB])
+      tempData[index(tempData)==problemRowDate[i],1]=tmpRg[1]
+      tempData[index(tempData)==problemRowDate[i],2]=tmpRg[2]
+    }
+  }
+  
+  if (nrow(tempData)==0) return(NULL)
+  tempData=as.numeric(tempData)
+  retV=round(range( tempData ),0)
+  return(retV)
+}
 
 getData=function (reqFun, data = s, myDate = Sys.Date())
 {
