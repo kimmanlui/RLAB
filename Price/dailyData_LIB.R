@@ -38,7 +38,7 @@ getThisMonth=function(myDate=Sys.Date())
   return( dateCand[dex] )
 }
  
-getDataRange=function(reqFun, data=s, myDate=Sys.Date() ) 
+getDataRange_old=function(reqFun, data=s, myDate=Sys.Date() ) 
 {
   if (is.date(index(data))) dateDex=index(data)
   else if ("date" %in% colnames(data) && is.date(data$date)) dateDex=data$date
@@ -47,6 +47,33 @@ getDataRange=function(reqFun, data=s, myDate=Sys.Date() )
   retV=round(range( tempData ),0)
   return(retV)
 }  
+
+getDataRange=function(reqFun, data=s, myDate=Sys.Date() , useColumn='x') 
+{
+  if (is.date(index(data))) dateDex=index(data)
+  else if ("date" %in% colnames(data) && is.date(data$date)) dateDex=data$date
+  tempData=(data[ dateDex %in% reqFun(myDate),])[,c(2,3)]
+  if (nrow(tempData)==0) return(NULL)
+  
+  if (useColumn!='x')
+  {
+    for ( i in nrow(tempData) )
+    {
+      if (is.na(tempData[i,1]))
+      {
+        tmpDate= index(tempData[i,1])
+        tmp    = getPrice(sDate=tmpDate)
+        tmpRg  = range(tmp[,useColumn])
+        tempData[i,1] = tmpRg[1]
+        tempData[i,2] = tmpRg[2]
+      }
+    }
+  }
+  
+  
+  retV=round(range( as.numeric(tempData) ),0)
+  return(retV)
+}
 
 getData=function (reqFun, data = s, myDate = Sys.Date())
 {
@@ -156,6 +183,15 @@ getRecentBound_for_this=function(x)
   wkThis=normalFun( x , thisWeekRange[1] , thisWeekRange[2])
   mtThis=normalFun( x , thisMonthRange[1] , thisMonthRange[2])
   return(c(mtThis, wkThis))
+}
+
+
+getRecentBound_for_thislast=function(x)
+{
+  
+  wk=normalFun( x , min(thisWeekRange[1],lastWeekRange[1])  , max(thisWeekRange[2],lastWeekRange[2]) )
+  mt=normalFun( x , min(thisMonthRange[1],lastMonthRange[1])  , max(thisMonthRange[2],lastMonthRange[2]) )
+  return(c(mt, wk))
 }
 
 

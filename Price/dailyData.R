@@ -22,10 +22,10 @@ source('/kim/gitdir/RLAB/Price/dailyData_LIB.R')
 
 
 
-thisWeekRange =getDataRange(getThisWeek)
-lastWeekRange =getDataRange(getLastWeek)
-thisMonthRange=getDataRange(getThisMonth)
-lastMonthRange=getDataRange(getLastMonth)
+thisWeekRange =getDataRange(getThisWeek  ,useColumn='hsi' )
+lastWeekRange =getDataRange(getLastWeek  ,useColumn='hsi' ) 
+thisMonthRange=getDataRange(getThisMonth ,useColumn='hsi' )
+lastMonthRange=getDataRange(getLastMonth ,useColumn='hsi' )
 
 thisWeekRange
 lastWeekRange
