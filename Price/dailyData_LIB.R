@@ -1,6 +1,21 @@
 # RLAB Provides a set of useful functions
 # VERSION 1.0
 
+getPrice=function(sDate=NULL)
+{
+  if (is.null(sDate))
+  {
+    sql="select * from et order by date desc, batch desc  LIMIT 1 "
+  } else
+  {
+    sql=paste0("select * from et where date='",sDate,"' order by date desc, batch desc ")
+    #print(sql)
+  }
+  retV=dbGetQuery(conn,sql)
+  return(retV)
+}
+
+
 is.date <- function(x) inherits(x, 'Date')
 
 getLastMonth=function(myDate=Sys.Date())
