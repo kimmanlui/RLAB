@@ -19,4 +19,4 @@ while 1==1:
         click(mpt[0]+action,mpt[1]+action)
         action = action * -1
     lastmpt=mpt
-    time.sleep(60*4)
+    time.sleep(60*3)

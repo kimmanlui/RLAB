@@ -66,7 +66,20 @@ for (i in 1:end_interval) {
        (format(Sys.time(), "%H") < 16)) {
     wakeUp(fromSec=40, toSec=45)
     
-    vl.org=getETQuote()
+    
+    
+    vl.org=tryCatch({
+      getETQuote()
+    }, warning = function(w) {  NULL
+    }, error = function(e)   {  print(paste(Sys.time(),"Error : calling getETQuote")) 
+    })
+    
+    if (length(vl.org)<=1)
+    {
+      Sys.sleep(25)
+      continue; 
+    }
+    
     vl=substrRight(round(vl.org[3],0),3)
     ssec.org=getSSEC()[2]
     names(ssec.org)="sh"
