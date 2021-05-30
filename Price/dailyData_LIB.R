@@ -78,9 +78,43 @@ getDataRange=function(reqFun, data=s, myDate=Sys.Date() , useColumn='x')
   return(retV)
 }
 
+dp.ana=function(sDate, data, n=5)
+{
+  dat=getLastTrade(sDate,data=data, n=n)
+  today=index(dat$cur[1])
+  yesterday=index(dat$body[n])
+  
+  datRg=getLastTradeRange(sDate,data=data, n=n)
+  rgdp=datRg$bodyRg[2]-datRg$bodyRg[1]
+  
+  odp=normalFun(as.numeric(dat$cur[,1]),datRg$bodyRg[1], datRg$bodyRg[2])
+  hdp=normalFun(as.numeric(dat$cur[,2]),datRg$bodyRg[1], datRg$bodyRg[2])
+  ldp=normalFun(as.numeric(dat$cur[,3]),datRg$bodyRg[1], datRg$bodyRg[2])
+  cdp=normalFun(as.numeric(dat$cur[,4]),datRg$bodyRg[1], datRg$bodyRg[2])
+  
+  pdat=getLastTrade(yesterday,data=data, n=n)
+  pdatRg=getLastTradeRange(yesterday,data=data, n=n)
+  prgdp=diff(pdatRg$bodyRg)
+  podp=normalFun(as.numeric(pdat$cur[,1]),pdatRg$bodyRg[1], pdatRg$bodyRg[2])
+  phdp=normalFun(as.numeric(pdat$cur[,2]),pdatRg$bodyRg[1], pdatRg$bodyRg[2])
+  pldp=normalFun(as.numeric(pdat$cur[,3]),pdatRg$bodyRg[1], pdatRg$bodyRg[2])
+  pcdp=normalFun(as.numeric(pdat$cur[,4]),pdatRg$bodyRg[1], pdatRg$bodyRg[2])
+  
+  fdat=getLastTrade(sDate,data=data, n=(n-1))
+  fdatRg=getLastTradeRange(sDate,data=data, n=(n-1))
+  oF=normalFun(as.numeric(dat$cur[,1]),datRg$allRg[1], datRg$allRg[2])
+  cF=normalFun(as.numeric(dat$cur[,4]),datRg$allRg[1], datRg$allRg[2])
+  
+  retV=data.frame(prgdp=round(prgdp),podp=podp, phdp=phdp,pldp=pldp,pcdp=pcdp,
+                  rgdp=round(rgdp),odp=odp, hdp=hdp,ldp=ldp,cdp=cdp,
+                  oF=oF,cF=cF) 
+  row.names(retV)=today
+  return(retV)
+}
+
 getLastTradeRange=function(sDate, data, n=5)
 {
-  dL=getLastTrade(sDate,data=data, n=n)
+  myD=getLastTrade(sDate,data=data, n=n)
   bodyRg=range(myD[[1]][,1:4])
   curRg=range(myD[[2]][,1:4])
   allRg=range(myD[[3]][,1:4])
