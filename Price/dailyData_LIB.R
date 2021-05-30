@@ -78,6 +78,15 @@ getDataRange=function(reqFun, data=s, myDate=Sys.Date() , useColumn='x')
   return(retV)
 }
 
+getLastTradeRange=function(sDate, data, n=5)
+{
+  dL=getLastTrade(sDate,data=data, n=n)
+  bodyRg=range(myD[[1]][,1:4])
+  curRg=range(myD[[2]][,1:4])
+  allRg=range(myD[[3]][,1:4])
+  return(list( bodyRg=bodyRg, curRg=curRg, allRg=allRg))
+}
+
 getLastTrade=function(sDate, data, n=5)
 {
   if (!("xts" %in% class(data))) stop("Wrong data type, mush xts")
