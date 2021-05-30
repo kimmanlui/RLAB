@@ -78,6 +78,27 @@ getDataRange=function(reqFun, data=s, myDate=Sys.Date() , useColumn='x')
   return(retV)
 }
 
+getLastTrade=function(sDate, data, n=5)
+{
+  if (!("xts" %in% class(data))) stop("Wrong data type, mush xts")
+  currTradeDate=getTradeDate(sDate, data)
+  dx=which(index(data)==currTradeDate)
+  bodyDat=data[(dx-1):(dx-n),]
+  curDat=data[dx,]
+  allDat=data[(dx):(dx-n),]
+  return(list(body=bodyDat,cur=curDat,all=allDat))
+}
+
+getTradeDate=function(sDate, data)
+{
+  for (i in 0:10)
+  {
+    tradeDate=as.Date(sDate)-i
+    if ( tradeDate %in%  index(data)) return (tradeDate)
+  }
+  return(0)
+}
+
 getData=function (reqFun, data = s, myDate = Sys.Date())
 {
   if (is.date(index(data))) dateDex=index(data)
