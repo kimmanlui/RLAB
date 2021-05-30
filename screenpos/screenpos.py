@@ -107,11 +107,11 @@ def loadObj():
 runStatus=loadObj()
 # [ xCorr, yCorr, width, height]
 if runStatus==0:
-    notepad=[-431,868,430,130]
+    notepad=[-431,868,437,130]
     chrome=[645, 0, 805, 862]
     outlook=[-431, 0, 1093, 868]
 if runStatus==1:
-    notepad=[-431,868,430,130]
+    notepad=[-431,868,437,130]
     chrome=[0, 0, 1450, 862]
     outlook=[-985, 0, 993, 868]
 if runStatus==2:

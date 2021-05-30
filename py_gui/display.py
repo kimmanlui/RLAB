@@ -32,7 +32,7 @@ class Display(threading.Thread):
         self.root.wm_title("AppWindow Test")
         self.root.protocol("WM_DELETE_WINDOW", self.callback)
 
-        self.root.geometry("150x30+-150+960") 
+        self.root.geometry("150x30+-150+975") 
         #self.root.attributes('-alpha', 0.3)
         self.root.wm_attributes("-topmost", 1)
         self.root.overrideredirect(True)
@@ -42,7 +42,7 @@ class Display(threading.Thread):
         print(self.text)
         self.text.set("---")
         
-        label = tk.Label(self.root, textvariable=self.text, bg='grey' , height=30, width=150 )
+        label = tk.Label(self.root, textvariable=self.text, bg='grey' , height=30, width=150, anchor="e")
         label.pack()
         self.root.attributes('-transparentcolor', 'grey')
         self.root.mainloop()
