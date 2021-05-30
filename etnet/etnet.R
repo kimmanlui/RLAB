@@ -77,7 +77,7 @@ for (i in 1:end_interval) {
     if (length(vl.org)<=1)
     {
       Sys.sleep(25)
-      continue; 
+      next; 
     }
     
     vl=substrRight(round(vl.org[3],0),3)
