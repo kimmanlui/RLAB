@@ -1,0 +1,143 @@
+REM monitor port-out port-in
+REM at  01:30 /every:Wednesday,Thursday                                       /kimman/prj/myR/check_if_port_out_done.bat
+REM at  01:57 /every:Wednesday,Thursday                                       /kimman/prj/myR/check_if_port_in_done.bat
+REM at  02:03 /every:Wednesday,Thursday                                       /kimman/prj/myR/check_if_port_in_done.bat
+REM at  02:07 /every:Wednesday,Thursday                                       /kimman/prj/myR/check_if_port_in_done.bat
+REM get ip address
+at  06:00 /every:Tuesday,Wednesday,Thursday,Friday,Saturday               /kimman/startup_job/copyydrive.bat
+at  05:00 /every:Tuesday,Wednesday,Thursday,Friday,Saturday               /kimman/startup_job/robocopyydrive.bat
+REM timesheet
+at  08:45 /every:Monday                                                   /kimman/prj/timesheet/timesheet.bat
+REM HouseKeep
+at  08:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/schedule/housekeep.bat 
+REM 
+REM
+REM at  00:59 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb_pout_sim/errordb_pout_sim_RUN.bat
+REM at  12:01 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb_pout_sim/errordb_pout_sim_RUN.bat
+REM
+REM at  08:45 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/batch_job/runR.bat
+REM at  15:30 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/batch_job/runR.bat
+REM     at  09:10 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handlePendingCompleted.bat
+REM     at  12:10 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handlePendingCompleted.bat
+REM     at  15:10 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handlePendingCompleted.bat
+REM
+REM     at  05:50 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleduplicatedMSP.bat
+REM     at  14:30 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleduplicatedMSP.bat
+REM
+REM at  04:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/mds-ping/mds-ping.bat
+at  03:45 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/mds-ping/dealBOMSuddenFailure.bat
+at  14:35 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/mds-ping/dealBOMSuddenFailure.bat
+at  21:35 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/rpt_errordb.bat
+REM
+at  00:15 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/forwardemail.bat
+at  09:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday                 /kim/etnet.bat
+at  09:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday                 /kim/displayEngine.bat
+REM
+REM   5:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/AppendOrderID/appendorderid.bat
+REM
+REM at  07:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  08:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  09:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  10:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  11:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  14:30 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  15:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  16:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  17:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  18:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  19:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  20:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM at  21:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_RUN.bat
+REM   at  17:30 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleNoUpdateCMN.bat 
+REM   at  18:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleNoUpdateCMN.bat
+REM   at  18:30 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleNoUpdateCMN.bat
+REM   at  19:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleNoUpdateCMN.bat
+REM   at  19:30 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleNoUpdateCMN.bat
+REM   at  20:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleNoUpdateCMN.bat
+REM   at  20:30 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleNoUpdateCMN.bat
+REM   at  21:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/myR/handleNoUpdateCMN.bat
+REM
+REM   at  01:35 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_POUT.bat
+REM   at  12:30 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb/errordb_POUT.bat
+REM
+REM at  14:00 /every:Wednesday,Thursday   /kimman/prj/myR/skytone_imsi.bat
+REM at  7:10 /every:Tuesday              /kimman/prj/myR/pldt/pldt_bye.bat
+REM at  19:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/batch_job/suspend.bat
+REM at  04:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/batch_job/suspend.bat
+REM
+at  08:05 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/checkMail.bat
+REM
+at  00:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  01:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  02:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  03:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  04:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  05:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  06:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  07:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  08:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  09:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  10:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  11:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  12:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  13:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  14:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  15:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  16:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  17:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  18:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  19:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  20:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  21:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  22:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  23:25 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  00:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  01:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  02:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  03:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  04:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  05:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  06:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  07:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  08:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  09:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  10:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  11:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  12:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  13:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  14:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  15:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  16:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  17:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  18:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  19:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  20:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  21:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  22:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+at  23:55 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/emailmanager/logftp.bat
+REM
+REM
+at  00:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  01:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  02:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  03:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  04:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  05:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  06:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  07:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  08:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  09:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  10:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  11:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  12:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  13:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  14:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  15:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  16:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  17:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  18:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  19:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  20:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  21:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  22:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
+at  23:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/ftp.bat
