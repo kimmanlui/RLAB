@@ -15,6 +15,6 @@ set CLASSPF="%SRC%/;%PACKAGE%/"
 
 cd %SRC%
 
-REM "%JAVAHM%\javac.exe"   -classpath %CLASSPF%   "%SRC%/Scheduler.java"
+"%JAVAHM%\javac.exe"   -classpath %CLASSPF%   "%SRC%/Scheduler.java"
 "%JAVAHM%\java.exe" -version
-"%JAVAHM%\java.exe" -classpath %CLASSPF% Scheduler out.txt err.txt submit_win.txt 
+"%JAVAHM%\java.exe" -classpath %CLASSPF% Scheduler NA err.txt submit_win.txt 

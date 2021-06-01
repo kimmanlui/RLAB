@@ -1,5 +1,8 @@
 Version: 2019.08.25
-/kimman/schedule_temp/
-TEMPDIR: /kimman/schedule_temp/
+C:\\kimman\\schedule_temp
+TEMPDIR: C:\\kimman\\schedule_temp
 There are 83 in tmpTask.txt
-1019:01020:01021:0
+941:0942:0cmd.exe /C start /min C:\\kimman\\schedule_temp\temp2021-06-01_943_8.bat
+>>> /kim/etnet.bat
+943:1
+944:0945:0946:0947:0

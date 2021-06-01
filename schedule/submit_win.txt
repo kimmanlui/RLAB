@@ -1,3 +1,5 @@
+at  13:50 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/mds-ping/dealBOMSuddenFailure.bat
+at  10:05 /every:Monday,Tuesday,Wednesday,Thursday,Friday                 /kim/etnet.bat
 REM monitor port-out port-in
 REM at  01:30 /every:Wednesday,Thursday                                       /kimman/prj/myR/check_if_port_out_done.bat
 REM at  01:57 /every:Wednesday,Thursday                                       /kimman/prj/myR/check_if_port_in_done.bat
@@ -9,7 +11,7 @@ at  05:00 /every:Tuesday,Wednesday,Thursday,Friday,Saturday               /kimma
 REM timesheet
 at  08:45 /every:Monday                                                   /kimman/prj/timesheet/timesheet.bat
 REM HouseKeep
-at  08:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/schedule/housekeep.bat 
+at  08:00 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kim/gitdir/RLAB/schedule/housekeep.bat 
 REM 
 REM
 REM at  00:59 /every:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday /kimman/prj/errordb_pout_sim/errordb_pout_sim_RUN.bat

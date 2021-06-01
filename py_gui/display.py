@@ -2,7 +2,7 @@ import tkinter as tk
 from ctypes import windll
 import threading
 import time
-
+from datetime import datetime
 
 GWL_EXSTYLE=-20
 WS_EX_APPWINDOW=0x00040000
@@ -32,7 +32,7 @@ class Display(threading.Thread):
         self.root.wm_title("AppWindow Test")
         self.root.protocol("WM_DELETE_WINDOW", self.callback)
 
-        self.root.geometry("150x30+-150+975") 
+        self.root.geometry("150x30+-150+972") 
         #self.root.attributes('-alpha', 0.3)
         self.root.wm_attributes("-topmost", 1)
         self.root.overrideredirect(True)
@@ -60,7 +60,16 @@ while 1==1:
        f = open('../../content.txt','r')
        lines = f.readlines()
        f.close()
+       lines[0]=lines[0][:-1]
        shownText=lines[0]
+       batchNum_min=int(lines[0][-2:])
+       batchNum_hr=int(lines[0][-4:-2])
+       batchNum= batchNum_hr*60 + batchNum_min
+       current_min = int(datetime.now().strftime("%M"))
+       current_hr = int(datetime.now().strftime("%H"))
+       current_time= current_hr*60 + current_min
+       if (current_time-batchNum)>5:
+           shownText=shownText+" - - - "
        print(shownText)
     except:
        print("there is an error") 

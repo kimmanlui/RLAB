@@ -139,8 +139,8 @@ public class Scheduler {
    private String handleBat(String cmd,int internalTaskCode)
    {
    
-      String filename=TEMPDIR+TM.getDate()+"_"+TM.haveIntTime()+"_"+internalTaskCode+".bat";
-   
+      //String filename="C:\\kimman\\schedule_temp\\temp"+TM.getDate()+"_"+TM.haveIntTime()+"_"+internalTaskCode+".bat";
+      String filename=TEMPDIR+"/temp"+TM.getDate()+"_"+TM.haveIntTime()+"_"+internalTaskCode+".bat";
    
       try { 
          File file = new File(filename); 
@@ -179,7 +179,7 @@ public class Scheduler {
             
             String exeCmd="cmd.exe /C start  "+cmd;
             exeCmd="cmd.exe /C start /min "+cmd;
-            //System.out.println(exeCmd);
+            System.out.println(exeCmd);
             Process proc =Runtime.getRuntime().exec(exeCmd);
             System.out.println(">>> "+messageCmd);  
          } 
