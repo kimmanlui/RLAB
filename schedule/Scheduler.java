@@ -140,7 +140,7 @@ public class Scheduler {
    {
    
       //String filename="C:\\kimman\\schedule_temp\\temp"+TM.getDate()+"_"+TM.haveIntTime()+"_"+internalTaskCode+".bat";
-      String filename=TEMPDIR+"/temp"+TM.getDate()+"_"+TM.haveIntTime()+"_"+internalTaskCode+".bat";
+      String filename="temp\\temp"+TM.getDate()+"_"+TM.haveIntTime()+"_"+internalTaskCode+".bat";
    
       try { 
          File file = new File(filename); 
@@ -166,6 +166,9 @@ public class Scheduler {
    public void exec(String cmd, int internalTaskCode) 
    {
       int lidx=cmd.lastIndexOf("\\"); 
+	  if (lidx == -1) {
+		  lidx=cmd.lastIndexOf("/"); 
+	  }
       String messageCmd=cmd.substring(lidx+1);  
       if (osType==1) //win
       {
