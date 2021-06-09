@@ -13,6 +13,7 @@ stamp=as.character(format(Sys.time(),"%H%M" ))
 istamp=as.numeric(stamp)
 firsttime=1
 
+print("before while")
 while(1==1)
 {
   
@@ -59,7 +60,7 @@ while(1==1)
       }
       newsec=as.numeric(as.character(format(Sys.time(),"%S" )))
           
-      print('..')
+      print('DisplayEngine ..')
       while( newsec>=oldsec)
       {
          Sys.sleep(1)

@@ -78,6 +78,18 @@ getDataRange=function(reqFun, data=s, myDate=Sys.Date() , useColumn='x')
   return(retV)
 }
 
+normalBody=function(  oV, hV, lV, cV  , datRg, colNameSuffix)
+{
+  rgdpT=datRg$bodyRg[2]-datRg$bodyRg[1]
+  oT=normalFun(as.numeric(oV),datRg$bodyRg[1], datRg$bodyRg[2])
+  hT=normalFun(as.numeric(hV),datRg$bodyRg[1], datRg$bodyRg[2])
+  lT=normalFun(as.numeric(lV),datRg$bodyRg[1], datRg$bodyRg[2])
+  cT=normalFun(as.numeric(cV),datRg$bodyRg[1], datRg$bodyRg[2])
+  t.df=data.frame(rg=rgdpT, oT=oT, hT=hT, lT=lT, cT=cT)
+  colnames(t.df)=paste0( c('rg','o','h','l','c') , colNamePrefix)
+  return(t.df)
+}
+
 dp.ana=function(sDate, data, n=5)
 {
   dat=getLastTrade(sDate,data=data, n=n)
@@ -85,8 +97,8 @@ dp.ana=function(sDate, data, n=5)
   yesterday=index(dat$body[n])
   
   datRg=getLastTradeRange(sDate,data=data, n=n)
-  rgdp=datRg$bodyRg[2]-datRg$bodyRg[1]
   
+  rgdp=datRg$bodyRg[2]-datRg$bodyRg[1]
   odp=normalFun(as.numeric(dat$cur[,1]),datRg$bodyRg[1], datRg$bodyRg[2])
   hdp=normalFun(as.numeric(dat$cur[,2]),datRg$bodyRg[1], datRg$bodyRg[2])
   ldp=normalFun(as.numeric(dat$cur[,3]),datRg$bodyRg[1], datRg$bodyRg[2])

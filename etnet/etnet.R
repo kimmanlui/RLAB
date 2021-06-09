@@ -7,13 +7,14 @@ library(XML)
 library(rvest)
 require(XML)
 
+print(paste("before source"))
 source('/kim/gitdir/RLAB/common/From_util.R')
 source('/kim/gitdir/RLAB/common/JDBC_MYSQL.R')
 myConn=conn
 
 test=FALSE
 
-
+print(paste("before getETQuote"))
 
 getETQuote = function() {
   date=Sys.Date()
@@ -34,7 +35,7 @@ getETQuote = function() {
 }
 
 
-
+print(paste("before test"))
 dailyHSI=NULL
 if (test==TRUE)
 {

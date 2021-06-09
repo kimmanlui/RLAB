@@ -50,6 +50,19 @@ mg$find()
 
 #UPDATE
 This is powerful as we can update a non-existent field
+
+    updateMongo=function(whereColumn, whereValue, updateColumn, updateValue, mg)
+    {
+      Qtoken=whereColumn
+      Qvalue=whereValue
+      Utoken=updateColumn
+      UValue=updateValue
+      monQ=paste0(' {"',Qtoken,'":"',Qvalue,'"}')
+      monU=paste0( '{"$set": {"',Utoken,'":"',UValue,'" }} '  )
+      retV=mg$update(query=monQ,  update=monU )
+      return(retV)
+    }
+
 ```{r}
 mg$update(query=' {"moon":"enceladus"}',  update='{"$set": {"rover":"yes" }} ')
 mg$find()
