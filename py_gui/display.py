@@ -42,7 +42,7 @@ class Display(threading.Thread):
         print(self.text)
         self.text.set("---")
         
-        label = tk.Label(self.root, textvariable=self.text, bg='grey' , height=30, width=150, anchor="e")
+        label = tk.Label(self.root, textvariable=self.text, bg='grey' ,fg='#000', height=30, width=150, anchor="e")
         label.pack()
         self.root.attributes('-transparentcolor', 'grey')
         self.root.mainloop()
@@ -71,6 +71,8 @@ while 1==1:
        if (current_time-batchNum)>5:
            shownText=shownText+" - - - "
        print(shownText)
+    except IOError: 
+       print("could not read file") 
     except:
        print("there is an error") 
 

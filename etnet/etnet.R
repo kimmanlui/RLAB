@@ -94,7 +94,14 @@ for (i in 1:end_interval) {
     stamp=as.character(format(Sys.time(),"%H%M" ))
     print(paste(vl,ssec,as.character(format(Sys.time(),"%H%M:%S" ))))
     if (stamp=="0929") print("===== ===== =====")
-    insertDataFrame(myConn, vl.org, c("c", "n", "c", rep("n",8),"c","n" ), "et" )
+    
+    
+    tryCatch({
+      insertDataFrame(myConn, vl.org, c("c", "n", "c", rep("n",8),"c","n" ), "et" )
+    }, warning = function(w) {  NULL
+    }, error = function(e)   {  print(paste(Sys.time(),"Error : calling insertDataFrame")) 
+    })
+    
     
   }
   
