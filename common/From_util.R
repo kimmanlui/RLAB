@@ -75,8 +75,4 @@ wakeUp=function(fromSec=40, toSec=45)
 
 ### jdbc.R
 
-sqlUpdateQuery=function(conn, sql)
-{
-  return(dbSendUpdate(conn, sql))
-}
 

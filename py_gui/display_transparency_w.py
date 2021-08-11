@@ -8,29 +8,11 @@ GWL_EXSTYLE=-20
 WS_EX_APPWINDOW=0x00040000
 WS_EX_TOOLWINDOW=0x00000080
 
-width=150
-height=30
-xpos=-150
-ypos=972
-background='grey'  #this will be transparent
-
-width=55
-height=17
-xpos=1355
-ypos=883
-background='green2'
-
-
 class Display(threading.Thread):
 
-    def __init__(self,  width, height, xpos, ypos, background):
+    def __init__(self):
         threading.Thread.__init__(self)
         self.start()
-        self.height=height
-        self.width=width
-        self.xpos=xpos
-        self.ypos=ypos
-        self.background=background
 
     def set_appwindow(self, root):
         hwnd = windll.user32.GetParent(root.winfo_id())
@@ -50,10 +32,7 @@ class Display(threading.Thread):
         self.root.wm_title("AppWindow Test")
         self.root.protocol("WM_DELETE_WINDOW", self.callback)
 
-        gemStr=str(self.width)+'x'+str(self.height)+'+'+str(self.xpos)+'+'+str(self.ypos)
-        print(gemStr)
-        #self.root.geometry("100x30+-150+972") 
-        self.root.geometry(gemStr) 
+        self.root.geometry("150x30+-150+972") 
         #self.root.attributes('-alpha', 0.3)
         self.root.wm_attributes("-topmost", 1)
         self.root.overrideredirect(True)
@@ -63,19 +42,15 @@ class Display(threading.Thread):
         print(self.text)
         self.text.set("---")
         
-        height=self.height
-        width= self.width
-        bg=self.background
-        label = tk.Label(self.root, textvariable=self.text, bg=bg ,fg='#000', height=height, width=width, anchor="e")
+        label = tk.Label(self.root, textvariable=self.text, bg='grey' ,fg='#000', height=30, width=150, anchor="e")
         label.pack()
         self.root.attributes('-transparentcolor', 'grey')
         self.root.mainloop()
-    def ontop(self):
-        self.root.attributes('-topmost',True)
+
     def changeText(self,text):
         self.text.set(text)  
 
-app = Display(   width , height, xpos, ypos, background)
+app = Display()
 print('Now we can continue running code while mainloop runs!')
 time.sleep(10)
 lines=""
@@ -102,24 +77,12 @@ while 1==1:
        print("there is an error") 
 
     app.changeText(shownText)
-    app.ontop()
     
     currSec=time.localtime().tm_sec
     if currSec>=workAtSec:
-        totalWait=60-currSec+1
-        intervalV=1
-        for ii in range(4):
-            if (totalWait-intervalV)>=intervalV:
-                time.sleep(intervalV)
-                totalWait=totalWait-intervalV
-                app.ontop()
-            else :
-                time.sleep(totalWait)
-                app.ontop()
-                break
+        time.sleep(60-currSec+1)
     while currSec<workAtSec:
         time.sleep(1)
-        app.ontop()
         currSec=time.localtime().tm_sec
     
     

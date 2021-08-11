@@ -46,6 +46,10 @@ resetjdbc=function(second=0)
 }
 
 
+sqlUpdateQuery=function(conn, sql)
+{
+  return(dbSendUpdate(conn, sql))
+}
 
 
 runSQL=function(sql) { return(dbGetQuery(conn, sql)) }
