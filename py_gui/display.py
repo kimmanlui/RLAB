@@ -70,6 +70,7 @@ class Display(threading.Thread):
         label.pack()
         self.root.attributes('-transparentcolor', 'grey')
         self.root.mainloop()
+
     def ontop(self):
         self.root.attributes('-topmost',True)
     def changeText(self,text):
@@ -87,15 +88,25 @@ while 1==1:
        f.close()
        lines[0]=lines[0][:-1]
        shownText=lines[0]
-       batchNum_min=int(lines[0][-2:])
-       batchNum_hr=int(lines[0][-4:-2])
+       batchNum_hr=int(lines[0][0:2])
+       batchNum_min=int(lines[0][2:4])
+       #print(batchNum_min)
+       #print(batchNum_hr)
        batchNum= batchNum_hr*60 + batchNum_min
        current_min = int(datetime.now().strftime("%M"))
        current_hr = int(datetime.now().strftime("%H"))
        current_time= current_hr*60 + current_min
-       if (current_time-batchNum)>5:
-           shownText=shownText+" - - - "
        print(shownText)
+       if (current_time-batchNum)>5:
+           position=0
+           shownText=shownText[:position] + "-" + shownText[position+1:]
+           position=1
+           shownText=shownText[:position] + "-" + shownText[position+1:]
+           position=2
+           shownText=shownText[:position] + "-" + shownText[position+1:]
+           position=3
+           shownText=shownText[:position] + "-" + shownText[position+1:]           
+           print(shownText)
     except IOError: 
        print("could not read file") 
     except:
@@ -103,7 +114,6 @@ while 1==1:
 
     app.changeText(shownText)
     app.ontop()
-    
     currSec=time.localtime().tm_sec
     if currSec>=workAtSec:
         totalWait=60-currSec+1
