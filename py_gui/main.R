@@ -11,7 +11,7 @@ vl.org=tryCatch({
 })
 
 hsi=round(as.numeric(vl.org[3])) %% 1000
-text=paste0(hsi, " ", batchToStamp(vl.org[2]))
+text=paste0(batchToStamp(vl.org[2])," ",hsi )
 print(text)
           
 displayQueue(text)
