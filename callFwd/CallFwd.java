@@ -15,8 +15,8 @@ import jtcpfwd.destination.Destination;
 import jtcpfwd.forwarder.Forwarder;
 import jtcpfwd.listener.Listener;
 import jtcpfwd.util.StreamForwarder;
-
-
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 public class CallFwd{
 
     public String[] SUPPORTED_DESTINATIONS = {
@@ -45,6 +45,21 @@ public class CallFwd{
             "Filter" // last one!
     };
 	
+	public String[] getParaIfFileNotFound(String fileabspath , String[] returnString) {
+	     File tempFile=null; 
+		 try {
+		         tempFile = new File(fileabspath);
+             if (tempFile.exists())
+			 {
+				 return getPara(fileabspath);
+			 }
+		}  catch(Exception e) 
+		{
+	      	e.printStackTrace();	
+		}
+	    return returnString;
+	}
+	
 	public String[] getPara(String fileabspath) {
         String[] arr= null;
         List<String> itemsSchool = new ArrayList<String>();
@@ -64,12 +79,15 @@ public class CallFwd{
                    itemsSchool.add(str_line);
                 } 
             }
-
+            fstream_school.close();
+            data_input.close();
+            buffer.close(); 
             arr = (String[])itemsSchool.toArray(new String[itemsSchool.size()]);
         } catch(Exception e) 
 		{
 	      	e.printStackTrace();	
 		}
+
 		return(arr); 
 	}
 	
@@ -109,6 +127,35 @@ public class CallFwd{
             os.close();
         }
     }
+	
+	public void writeStartUpLog(String sourceFile, String info)
+	{
+		File fileName = new File(sourceFile);
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        LocalDateTime now = LocalDateTime.now();
+        String dts=""+dtf.format(now);
+		BufferedWriter writer = null;
+		try
+        {
+            writer = new BufferedWriter( new FileWriter( sourceFile));
+            writer.write( "CallFwd starts at "+dts+"\n\n"+info);
+        }
+        catch ( IOException e)
+        {
+        }
+        finally
+        {
+            try
+            {
+                if ( writer != null)
+                writer.close( );
+            }
+            catch ( IOException e)
+            {
+            }
+        }
+	}
 
   public  ForwarderThread[] start(String[] args) throws Exception {
         ForwarderThread[] result;
@@ -193,17 +240,17 @@ public class CallFwd{
 	
 	String workParaFile =paraFile[0]; 
 	String sleepParaFile=paraFile[1]; 
-	String recoverParaFile =paraFile[2]; 
-	int sleepH=Integer.parseInt(paraFile[3]); 
-	int sleepM=Integer.parseInt(paraFile[4]); 
-	int recoverH=Integer.parseInt(paraFile[5]);
-	int recoverM=Integer.parseInt(paraFile[6]);
+	String startuplogParaFile =paraFile[2]; 
+	int sleepH1=Integer.parseInt(paraFile[3]); 
+	int sleepM1=Integer.parseInt(paraFile[4]); 
+	int sleepH2=Integer.parseInt(paraFile[5]);
+	int sleepM2=Integer.parseInt(paraFile[6]);
 	
-	System.out.println("workParaFile    "+workParaFile);
-	System.out.println("sleepParaFile   "+sleepParaFile);
-	System.out.println("recoverParaFile "+recoverParaFile);	
-	System.out.println("Sleep   "+sleepH+":"+sleepM);
-	System.out.println("Recover "+recoverH+":"+recoverM);
+	System.out.println("workParaFile       "+workParaFile);
+	System.out.println("sleepParaFile      "+sleepParaFile);
+	System.out.println("startuplogParaFile "+startuplogParaFile);	
+	System.out.println("Sleep1   "+sleepH1+":"+sleepM1);
+	System.out.println("Sleep2   "+sleepH2+":"+sleepM2);
 	
 	String[] currpara=null; 
 	String[] lastpara=null; 
@@ -236,14 +283,14 @@ public class CallFwd{
 	try {
         result=callfwd.start(currpara);
 
-
+        callfwd.writeStartUpLog(startuplogParaFile, currpara[0]+"\n"+currpara[1]);
 
         for (int k=0; k<1000000;k++)
         {
 	
-            Thread.sleep(60000);
+            
 
-		    currpara=callfwd.getPara(workParaFile);
+		    currpara=callfwd.getParaIfFileNotFound(workParaFile, currpara);
 		    if (callfwd.compPara(currpara, lastpara)==-1) 
 		    {
 			    System.out.println("Paramater Changed: Restart");
@@ -254,8 +301,8 @@ public class CallFwd{
             Calendar now = Calendar.getInstance();
 		    int hour = now.get(Calendar.HOUR_OF_DAY);
             int minute = now.get(Calendar.MINUTE);
-            System.out.println("time "+hour+":"+minute);
-            if (sleepH==hour && sleepM<=minute && (minute<=sleepM+5) ) 
+            
+            if (sleepH1==hour && sleepM1<=minute && (minute<=sleepM1+5) ) 
 		    {
 				sleeppara=callfwd.getPara(sleepParaFile);
 				if (callfwd.compPara(currpara, sleeppara)==1) 
@@ -263,27 +310,26 @@ public class CallFwd{
 					System.out.println("System Already Slept");
 				} else
 				{
-			        callfwd.copyFileUsingStream(workParaFile, recoverParaFile);
 			        callfwd.copyFileUsingStream(sleepParaFile, workParaFile);
 			        System.out.println("System gonna Sleeping");
 				}
 		    }
-		    if (recoverH==hour && recoverM<=minute && minute<=recoverM+5 ) 
+			
+			if (sleepH2==hour && sleepM2<=minute && (minute<=sleepM2+5) ) 
 		    {
-				System.out.print("recover");
-				recoverpara=callfwd.getPara(recoverParaFile);
-				if (callfwd.compPara(currpara, recoverpara)==1) 
+				sleeppara=callfwd.getPara(sleepParaFile);
+				if (callfwd.compPara(currpara, sleeppara)==1) 
 				{
-					System.out.println("System Already Recovered");
+					System.out.println("System Already Slept");
 				} else
 				{
-			      callfwd.copyFileUsingStream(recoverParaFile, workParaFile);
-			      System.out.println("System gonna recovering");
+			        callfwd.copyFileUsingStream(sleepParaFile, workParaFile);
+			        System.out.println("System gonna Sleeping");
 				}
 		    }
-
-
-            System.out.print(".");
+            //System.out.println("time "+hour+":"+minute);
+            //System.out.print(".");
+			Thread.sleep(60000);
         }
 	
 	}
