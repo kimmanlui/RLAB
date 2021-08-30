@@ -177,7 +177,8 @@ public class CallFwd{
                        System.out.println("sleep"); 
                        Thread.sleep(2000);
                     }
-                    t.stop(); 
+					t=null; 
+                    //t.stop(); 
                     
                 } else {
                     throw new IOException("Invalid line in config file: " + line);
@@ -327,6 +328,12 @@ public class CallFwd{
 			        System.out.println("System gonna Sleeping");
 				}
 		    }
+			
+			if (hour==7 && minute==0) 
+			{
+				System.exit(RESTART_CODE);
+			}
+			
             //System.out.println("time "+hour+":"+minute);
             //System.out.print(".");
 			Thread.sleep(60000);
