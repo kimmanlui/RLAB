@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import Select
 
 
 def whichisit():
-    print("selenium_LIB version 13-May")
+    print("selenium_LIB version 15-May")
 
 def myOpen(server, url):
     global driver
