@@ -1,5 +1,17 @@
+
+
 cls
 echo off
+
+SET MF="c:\users\cskml\box"
+IF EXIST %MF% (
+  set MASTERFILE=/kim/gitdir/RLAB/callFwd/confMaster_dell.txt
+) ELSE (
+  set MASTERFILE=/kim/gitdir/RLAB/callFwd/confMaster.txt 
+)
+
+
+
 set BASE=/kim/gitdir/RLAB/callFwd
 set SRC=%BASE%
 set JAR=%BASE%
@@ -14,7 +26,7 @@ set RERUN=%ERRORLEVEL%
 :loop
 echo %RERUN%
 IF %RERUN% EQU 112 GOTO ERROR
-%JAVA_HOME%/bin/java -cp %CP%  CallFwd /kim/gitdir/RLAB/callFwd/confMaster.txt
+%JAVA_HOME%/bin/java -cp %CP%  CallFwd %MASTERFILE%
 set RERUN=%ERRORLEVEL%
 goto loop
 
