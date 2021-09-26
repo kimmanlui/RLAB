@@ -2,9 +2,9 @@
 title: "人工智能知識及應用證書（兼讀制）實習二"
 output:
   html_notebook: default
----
+--- 
 
-Date : 01-Oct-2021
+Date : 01-Oct-2021 v1
 
 ### Learning Objective
 * This tutorial is to demonstrate how to build a more complicated Neural Network models in R<br>
