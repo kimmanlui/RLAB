@@ -3,7 +3,7 @@ title: "人工智能知識及應用證書（兼讀制）實習一"
 output: html_notebook
 ---
 
-Date : Oct-2021
+Date : Oct-2021 v1
 
 ### Learning Objective
 * As AI will soon be everywhere, everyone should have the right skill set to understand an AI model. This tutorial is to demonstrate for beginners how to build Neural Network models in R to solve problems<br>
