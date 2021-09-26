@@ -153,6 +153,9 @@ __Question__ Why linear.output is FALSE?<br>
 plot(model)
 ```
 Task 13: Plot Model<br>
+Execute head(model$result.matrix) to obtain the error<br>
+__Question__ How could we decrease the neural network error?
+
 
 ```{r}
 preds <- neuralnet::compute(model, mnist_test[1, 1:784])
@@ -163,8 +166,11 @@ Task 14: Classify unknown character<br>
 __Question__ What is the predicted number?<br>
 __Question__ Verify the result by calling showImage?<br>
 
+<br>
+<br>
+<br>
 
-Exercises<br>
+### Exercises
 [1] CRM<br>
 Explain how to classify valuable customers from the sales database. Note that each company may keep different data sets. Students should make some assumptions.<br>
 
