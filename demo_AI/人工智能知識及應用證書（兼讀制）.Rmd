@@ -20,18 +20,27 @@ __Question__ Is Rstudio gaining popularity? <br>
 
 
 ```{r}
-install.packages('neuralnet')
+install.packages(pkgs='neuralnet')
 
 ```
 Task 1: Install the [R package](https://en.wikipedia.org/wiki/R_package) "[neuralnet](https://cran.r-project.org/web/packages/neuralnet/index.html)".<br>
+<span style="color: brown;">  R is a case-sensitive language. Install.packages is incorrect! </span><br>
+<span style="color: brown;">  A package is a toolbox for doing things for a specific computer language.  </span><br>
+<span style="color: brown;">  In many computer languages, '123' or "123" is a text while 123 is a number.
+</span><br>
+<span style="color: brown;">  install.packages is a function. The input of the function is 'neuralnet' 
+</span><br>
 __Question__ Can we install RStudio IDE on PC? 
  
 
 
 ```{r}
-library('neuralnet')
+library(package='neuralnet')
 ```
 Task 2: Load the package 'neuralnet'.<br>
+<span style="color: brown;">
+The library function is to load a specific package.
+</span><br>
 __Question__ Do we have to load the package after we start a new R session?<br>
 __Question__ Could we load the package twice? <br>
 
@@ -45,9 +54,9 @@ rawdata = "
  45  ,  0 , 1
  55  ,  1 , 1"
 
-data <- read.csv(text=rawdata , header=TRUE)
+trainData = read.csv(text=rawdata , header=TRUE)
 
-print(data)
+print(trainData)
 ```
 Task 3: Data Preparation<br>
 We have a small data set (four records).<br>
@@ -59,15 +68,16 @@ __Question__ What happens if header=FALSE?
 
 
 ```{r}
-model=neuralnet(cancer~age+smoking  ,
-                data=data           , 
-                hidden=3            ,
-                stepmax=1e+05       , 
-                act.fct = "logistic",
-                linear.output = FALSE)
+model=neuralnet(formula       =  cancer~age+smoking  ,
+                data          =  trainData           , 
+                hidden        =  3                   ,
+                stepmax       =  1e+05               , 
+                act.fct       = "logistic"           ,
+                linear.output = FALSE                )
 ```
 
 Task 4: Model<br>
+<span style="color: brown;">  1e+05=100000  </span><br>
 Build an artificial neural network model of hidden=3
 
 
@@ -82,8 +92,8 @@ __Question__ If we re-do Task 4 and Task 5 again, will we get the same model? <b
 __Question__ What happens if we change stepmax=5<br>
 
 ```{r}
-Predict=compute(model, data.frame(age=50, smoking=1))
-print(Predict)
+predictData=neuralnet::compute(model, data.frame(age=50, smoking=1))
+print(predictData)
 ```
 
 Task 6: Prediction<br>
@@ -118,11 +128,11 @@ Build a model to solve a case that a person who is age=30, smoking=1, drinking=1
 <br>
 [2] Redo the exercise 1 with the model of hidden=c(3,3)
 ```{r}
-model=neuralnet(cancer~age+smoking,
-                data=data, 
-                hidden=c(3,3),
-                act.fct = "logistic",
-                linear.output = FALSE)
+model=neuralnet(formula       = cancer~age+smoking ,
+                data          = trainData          , 
+                hidden        = c(3,3)             ,
+                act.fct       = "logistic"         ,
+                linear.output = FALSE              )
 plot(model)
 ```
 

@@ -4,10 +4,10 @@ output:
   html_notebook: default
 --- 
 
-Date : 01-Oct-2021 v1
+Date : 01-Oct-2021 v1.1
 
 ### Learning Objective
-* This tutorial is to demonstrate how to build a more complicated Neural Network models in R<br>
+* This tutorial is to demonstrate how to build a more complicated Neural Network model in R<br>
 * Students may follow the instructions and gain hands-on experience buiding an AI model. 
 * This is a handwritten pattern recognition tutorial.
 * By completing the tutorial, students should be able to solve real-world AI problems. 
@@ -40,7 +40,7 @@ __Question__ What is dplyr? <br>
 class(mnist_train)
 nrow(mnist_train)
 ncol(mnist_train)
-colnames(mnist_train)
+head(colnames(mnist_train))
 ```
 Task 3: Exam the raw data <br>
 Execute the above. Note that the outcome variable is a factor, which can take on 10 values.<br>
