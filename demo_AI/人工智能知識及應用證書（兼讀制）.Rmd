@@ -24,11 +24,11 @@ install.packages(pkgs='neuralnet')
 
 ```
 Task 1: Install the [R package](https://en.wikipedia.org/wiki/R_package) "[neuralnet](https://cran.r-project.org/web/packages/neuralnet/index.html)".<br>
-<span style="color: brown;">  R is a case-sensitive language. Install.packages is incorrect! </span><br>
-<span style="color: brown;">  A package is a toolbox for doing things for a specific computer language.  </span><br>
-<span style="color: brown;">  In many computer languages, '123' or "123" is a text while 123 is a number.
-</span><br>
-<span style="color: brown;">  install.packages is a function. The input of the function is 'neuralnet' 
+<span style="color: brown;">  
+R is a case-sensitive language. Install.packages is incorrect!              <br>
+A package is a toolbox for doing things for a specific computer language.   <br>
+In many computer languages, '123' or "123" is a text while 123 is a number. <br>
+install.packages is a function. The input of the function is 'neuralnet' 
 </span><br>
 __Question__ Can we install RStudio IDE on PC? 
  
@@ -77,7 +77,7 @@ model=neuralnet(formula       =  cancer~age+smoking  ,
 ```
 
 Task 4: Model<br>
-<span style="color: brown;">  1e+05=100000  </span><br>
+<span style="color: brown;">  Note 1e+05=100000  </span><br>
 Build an artificial neural network model of hidden=3
 
 
@@ -103,7 +103,7 @@ __Question__ what about age=43?<br>
 __Question__ what about age=100?<br>
 __Question__ If we have more training data, will the model be better? Explain.<br>
 
-### Exercise
+### Exercises
 [1] One more variabe, drinking, is added as below<br>
 
 ```{r}
