@@ -27,7 +27,8 @@ checkIfSendEmail=function(msg, res=NULL)
     lastmg=findMongo('msg', msg, mg)
     print("lastmg")
     print(lastmg)
-    if (lastmg[1,'status']=='TRUE') FlagLastStatus=TRUE
+    
+    if (nrow(lastmg)==0 || lastmg[1,'status']=='TRUE') FlagLastStatus=TRUE
     updateMongo('msg', msg, 'status', as.character(res), mg)
     if ( as.numeric(format(Sys.time(),"%H"))  %in% c(7,12,18,23) ) FlagSendTime=TRUE
     if (FlagLastStatus==TRUE ) FlagSendMail=TRUE
@@ -39,6 +40,10 @@ checkIfSendEmail=function(msg, res=NULL)
   print(paste(msg, res, FlagLastStatus, FlagSendTime, FlagSendMail))
   return(FlagSendMail)
 }  
+dat=data.frame(  url=c("http://js55.myftp.org" , "http://js55.myftp.org" ) , 
+                 sig=c("permission"            , "permission"            ) , 
+                 msg=c('js56'                  , "js55"                  ) ,
+                 stringsAsFactors = FALSE)
 
 library(XML)
 xmlData <- xmlParse("/kim/conf.xml")
@@ -50,19 +55,18 @@ library(httr)
 library(RCurl)
 library(rvest)
 source('C:/kimman/prj/myR/SUPPORT_LIB.R')
-dat=data.frame(  url=c("http://99.myftp.org" , "http://js55.myftp.org" ) , 
-                 sig=c("shine"               , "permission"            ) , 
-                 msg=c('99'                  , "js55"                  ) ,
-                 stringsAsFactors = FALSE)
+
 
 dat=rbind(dat, data.frame(url="http://10.203.68.23:8080/sbmvnoapp/login.html" , sig="Forgot Password",  msg='rhmvno01'))
 dat=rbind(dat, data.frame(url="http://10.203.68.24:8080/sbmvnoapp/login.html" , sig="Forgot Password",  msg='rhmvno02'))
 dat=rbind(dat, data.frame(url="http://10.203.68.26:8080/sbmvnoapp/login.html" , sig="Forgot Password",  msg='rhmvno04'))
 dat=rbind(dat, data.frame(url="http://10.212.1.8:8080/sbmvnoapp/login.html"   , sig="Forgot Password",  msg='rhmvnoa3'))
-
+dat=rbind(dat, data.frame(url="http://10.203.68.25:8161/admin/queues.jsp"     , sig="Reason"         ,  msg='mq03'))
+#dat=rbind(dat, data.frame(url="http://10.203.68.26:8161/admin/queues.jsp"     , sig="Reason"         ,  msg='mq04'))
 
 for (i in 1: nrow(dat))
 {
+  print(i)
   #i=6
    url=dat[i,'url']
    sig=dat[i,'sig']
@@ -92,6 +96,8 @@ for (i in 1: nrow(dat))
      temp=runSendMailBody(email=chkweb_topeople_hot , subject=subject, body=subject, from='checkWebSite')
      if (i>=3)
      {
+       print("alert")
+       print(i)
        temp=runSendMailBody(email=chkweb_topeople_team , subject=subject, body=subject, from='checkWebSite')
      }
    }

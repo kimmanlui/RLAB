@@ -7,7 +7,8 @@ getBatch=function() batch.numeric(as.numeric(getStamp()))
 insertDataFrame=function(myconn, dat, dataType, tablename)
 {
   checkIf(class(dat)!="data.frame", "error: dat should be data.frame"  )
-  checkIf(  ncol(dat)!=length(dataType) , "error: dat should be data.frame"  )
+  
+  checkIf(  ncol(dat)!=length(dataType) , paste0("error: ",ncol(dat)," ",length(dataType))  )
   
   for (k in 1: nrow(dat))
   {
