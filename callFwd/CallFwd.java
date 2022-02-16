@@ -230,7 +230,9 @@ public class CallFwd{
         System.out.println("All forwarders started.");
         return result;
     }
-	
+
+  /*  ******** */
+  
   public static void main(String[] args)
   {
     System.out.println("Number of input parameters :"+args.length);
@@ -258,9 +260,32 @@ public class CallFwd{
 	String[] sleeppara=null;
 	String[] recoverpara=null; 
 	
+	
+	File tempFile=null; 
+	try 
+	{
+		tempFile = new File(workParaFile);
+        if (!tempFile.exists())
+	    {
+		   callfwd.copyFileUsingStream(sleepParaFile, workParaFile); 
+		}
+	} catch(Exception e) 
+	{
+	    e.printStackTrace();	
+	}	
+    
 	currpara=callfwd.getPara(workParaFile);
 	lastpara=callfwd.getPara(workParaFile);
-	
+
+	try 
+	{
+		tempFile = new File(workParaFile);
+        tempFile.delete(); 
+	} catch(Exception e) 
+	{
+	    e.printStackTrace();	
+	}	
+
 	callfwd.printPara(currpara);
 	
     int RESTART_CODE=111;

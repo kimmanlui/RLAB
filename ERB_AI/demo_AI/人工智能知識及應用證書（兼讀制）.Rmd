@@ -1,0 +1,151 @@
+---
+title: "人工智能知識及應用證書（兼讀制）實習一"
+output: html_notebook
+---
+
+Date : Oct-2021 v1
+
+### Learning Objective
+* As AI will soon be everywhere, everyone should have the right skill set to understand an AI model. This tutorial is to demonstrate for beginners how to build Neural Network models in R to solve problems<br>
+* Students may follow the instructions and gain hands-on experience buiding an AI model. 
+* This is a low-code tutorial in R
+
+
+
+### Tools
+* R : [R](https://www.r-project.org/) is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing.
+* [rstudio.cloud](https://rstudio.cloud/) : Studio Cloud is created with an aim to make it easy for professionals, hobbyists, trainers, teachers and students to practice, share, teach and learn data science. In the basic term, RStudio Cloud is a managed cloud instance of the RStudio IDE.<br>
+__Question__ Is R language popular? <br>
+__Question__ Is Rstudio gaining popularity? <br>
+
+
+```{r}
+install.packages(pkgs='neuralnet')
+
+```
+Task 1: Install the [R package](https://en.wikipedia.org/wiki/R_package) "[neuralnet](https://cran.r-project.org/web/packages/neuralnet/index.html)".<br>
+<span style="color: brown;">  
+R is a case-sensitive language. Install.packages is incorrect!              <br>
+A package is a toolbox for doing things for a specific computer language.   <br>
+In many computer languages, '123' or "123" is a text while 123 is a number. <br>
+install.packages is a function. The input of the function is 'neuralnet' 
+</span><br>
+__Question__ Can we install RStudio IDE on PC? 
+ 
+
+
+```{r}
+library(package='neuralnet')
+```
+Task 2: Load the package 'neuralnet'.<br>
+<span style="color: brown;">
+The library function is to load a specific package.
+</span><br>
+__Question__ Do we have to load the package after we start a new R session?<br>
+__Question__ Could we load the package twice? <br>
+
+
+
+```{r}
+rawdata = "
+ age , smoking, cancer
+ 35  ,  0 , 0
+ 40  ,  1 , 0
+ 45  ,  0 , 1
+ 55  ,  1 , 1"
+
+trainData = read.csv(text=rawdata , header=TRUE)
+
+print(trainData)
+```
+Task 3: Data Preparation<br>
+We have a small data set (four records).<br>
+The meaning of data is self-explanatory.<br>
+__Question__ What is [csv](https://www.businessinsider.com/what-is-csv-file)?<br>
+__Question__ How will we find out if a person who is age=50 and smoking=1 will get cancer? (Note that we will not adopt any special math formula or if-then logic) <br>
+__Question__ What happens if header=FALSE?
+
+
+
+```{r}
+model=neuralnet(formula       =  cancer~age+smoking  ,
+                data          =  trainData           , 
+                hidden        =  3                   ,
+                stepmax       =  1e+05               , 
+                act.fct       = "logistic"           ,
+                linear.output = FALSE                )
+```
+
+Task 4: Model<br>
+<span style="color: brown;">  Note 1e+05=100000  </span><br>
+Build an artificial neural network model of hidden=3
+
+
+```{r}
+plot(model)
+```
+Task 5: Neural Network's Structure Diagrams<br>
+The model can be visualized as shown above.<br>
+__Question__ Where are [neurons](https://towardsdatascience.com/the-differences-between-artificial-and-biological-neural-networks-a8b46db828b7)?<br> 
+__Question__ Which one is hidden layer?<br>
+__Question__ If we re-do Task 4 and Task 5 again, will we get the same model? <br>
+__Question__ What happens if we change stepmax=5<br>
+
+```{r}
+predictData=neuralnet::compute(model, data.frame(age=50, smoking=1))
+print(predictData)
+```
+
+Task 6: Prediction<br>
+The result value is close to 1<br>
+Thus, there is a high chance to get cancer.<br>
+__Question__ what about age=43?<br>
+__Question__ what about age=100?<br>
+__Question__ If we have more training data, will the model be better? Explain.<br>
+
+### Exercises
+[1] One more variabe, drinking, is added as below<br>
+
+```{r}
+
+rawdata = "
+ age , smoking, drinking, cancer
+ 25  ,  1 , 1, 0
+ 30  ,  1 , 0, 0
+ 35  ,  0 , 1, 1
+ 38  ,  1 , 1, 1
+ 40  ,  1 , 1, 0
+ 45  ,  1 , 0, 0
+ 45  ,  1 , 1, 0
+ 47  ,  0 , 1, 1
+ 49  ,  1 , 1, 1
+ 55  ,  1 , 1, 1"
+```
+Build a model to solve a case that a person who is age=30, smoking=1, drinking=1 may get cancer.
+<br>
+<br>
+<br>
+<br>
+[2] Redo the exercise 1 with the model of hidden=c(3,3)
+```{r}
+model=neuralnet(formula       = cancer~age+smoking ,
+                data          = trainData          , 
+                hidden        = c(3,3)             ,
+                act.fct       = "logistic"         ,
+                linear.output = FALSE              )
+plot(model)
+```
+
+<br>
+
+### Reference
+
+[1] Whenever i run my neural network I get different result.<br>
+https://www.researchgate.net/post/Whenever-i-run-my-neural-network-I-get-different-result<br>
+[2] What Is RStudio Cloud And Why Is It Gaining Popularity<br>
+https://analyticsindiamag.com/what-is-rstudio-cloud-and-why-is-it-gaining-popularity/ <br>
+[3] R for Economics and Finance: Getting research data<br>
+http://rstudio-pubs-static.s3.amazonaws.com/41274_b888794c95b84e6b937c1099202380c4.html<br>
+[4] neuralnet<br>
+https://github.com/cran/neuralnet/tree/master/R<br>
+
