@@ -1,0 +1,1 @@
+/anaconda3/python /kim/gitdir/RLAB/ftp/ftp_python_dell.py
