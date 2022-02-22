@@ -14,10 +14,14 @@ xpos=-150
 ypos=972
 background='grey'  #this will be transparent
 
-width=55
+width=58
 height=17
 xpos=1355
-ypos=883
+ypos=890
+
+width=77
+xpos=1806
+ypos=1034
 background='green2'
 
 

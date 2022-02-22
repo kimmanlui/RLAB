@@ -15,8 +15,10 @@ while 1==1:
     if mpt[0]==lastmpt[0] and mpt[1]==lastmpt[1]:
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
-        print("Move the mouse at ", current_time)
-        click(mpt[0]+action,mpt[1]+action)
+        xx=mpt[0]+action
+        yy=mpt[1]+action
+        print("Move the mouse (",str(xx),",",str(yy),") at", current_time)
+        click(xx,yy)
         action = action * -1
     lastmpt=mpt
     time.sleep(60*3)

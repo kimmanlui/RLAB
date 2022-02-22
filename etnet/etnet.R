@@ -11,7 +11,7 @@ print(paste("before source"))
 source('/kim/gitdir/RLAB/common/From_util.R')
 source('/kim/gitdir/RLAB/common/JDBC_MYSQL.R')
 myConn=conn
-
+myconn=conn
 test=FALSE
 
 print(paste("before getETQuote"))
@@ -65,6 +65,9 @@ for (i in 1:end_interval) {
        (format(Sys.time(), "%H") >=10) &&
        (format(Sys.time(), "%H") != 12) && 
        (format(Sys.time(), "%H") < 16)) {
+    
+    
+    
     wakeUp(fromSec=40, toSec=45)
     
     
@@ -82,10 +85,12 @@ for (i in 1:end_interval) {
     }
     
     vl=substrRight(round(vl.org[3],0),3)
-    ssec.org=getSSEC()[2]
-    names(ssec.org)="sh"
+    #ssec.org=getSSEC()[2]
+    #names(ssec.org)="sh"
+    ssec.org=111
     vl.org=cbind(vl.org, ssec.org)
-    ssec=substrRight(round(ssec.org,0),2)
+    #ssec=substrRight(round(ssec.org,0),2)
+    ssec=111
     
     tempHSI=data.frame(date=Sys.time(),hsi=vl,ssec=ssec)
     dailyHSI=rbind(dailyHSI,tempHSI)
@@ -95,7 +100,7 @@ for (i in 1:end_interval) {
     print(paste(vl,ssec,as.character(format(Sys.time(),"%H%M:%S" ))))
     if (stamp=="0929") print("===== ===== =====")
     
-    
+   
     tryCatch({
       insertDataFrame(myConn, vl.org, c("c", "n", "c", rep("n",8),"c","n" ), "et" )
     }, warning = function(w) {  NULL
