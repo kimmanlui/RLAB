@@ -321,7 +321,10 @@ public class CallFwd{
 		    {
 			    System.out.println("Paramater Changed: Restart");
 			    System.exit(RESTART_CODE);
-		    }
+		    } else
+			{
+				System.out.print(".");
+			}
 		
 
             Calendar now = Calendar.getInstance();
