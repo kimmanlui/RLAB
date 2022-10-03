@@ -1,6 +1,6 @@
-/Users/homa/box/confFwd.txt
-/kim/gitdir/RLAB/callFwd/sleep.txt
-/Users/homa/box/startuplog.txt
+/Users/admin/Library/CloudStorage/Box-Box/M1_ROOT/confFwd.txt
+/Users/admin/RLAB/callFwd_M1/sleep.txt
+/Users/admin/Library/CloudStorage/Box-Box/M1_ROOT/startuplog.txt
 18
 00
 23
