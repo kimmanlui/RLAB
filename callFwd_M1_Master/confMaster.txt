@@ -3,5 +3,5 @@
 /Users/admin/Library/CloudStorage/Box-Box/startuplog.txt
 18
 00
-23
-50
+12
+30
